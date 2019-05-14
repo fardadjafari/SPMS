@@ -1,0 +1,40 @@
+﻿@using CaptchaMvc.HtmlHelpers
+
+@{
+    Layout = null;
+}
+
+<html lang="fa">
+
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/Acount/Style.css" rel="stylesheet" />
+</head>
+
+<body dir="rtl">
+    <div class="coontainer">
+        <div class="frame">
+            <div class="lockpic">
+                <img src="~/Images/shield.png" />
+            </div>
+            @using (Html.BeginForm("Index", "Acount"))
+            {
+                <div class="formpanel">
+                    <h2>نام کاربری :</h2>
+                    <input type="text" name="username" />
+                    <p style="font-size:14px; display:block;color:red; margin-top:8px;">@ViewBag.Errorpass</p>
+                    <h2> گذرواژه :</h2>
+                    <input type="password" name="password" />
+                    <h2> کد امنیتی :</h2>
+                    @Html.MathCaptcha("", "", "کد امنیتی را وارد کنید", true)
+                    <br />
+                    <p style="font-size:14px; display:block;color:red; margin-top:-25px;">@ViewBag.ErrMessage</p>
+                    <button type="submit">ورود</button>
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+
+</html>

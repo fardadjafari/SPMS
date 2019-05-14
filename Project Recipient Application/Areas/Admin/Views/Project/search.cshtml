@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Project_Recipient_Application.Models.Project>
+
+@{
+    ViewBag.Title = "search";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage.cshtml";
+    Project_Recipient_Application.Utility.DataConvert dataCon = new Project_Recipient_Application.Utility.DataConvert();
+}
+
+<h2 class="pull-left">مشاهده پروژه ها</h2>
+
+<div class="clearfix"></div>
+
+<div style="margin:30px;">
+    @using (Html.BeginForm())
+    {
+
+        <div class="form-group">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
+                @Html.TextBox("strsearch", "", new { @class = "form-control", placeholder = "جستجو...." })
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-info">جستجو  <span class="fa fa-search"></span></button>
+            </div>
+
+        </div>
+    }
+</div>
+
+
+
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Studentses.Family)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Studentses.stuCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sortFile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Urlfile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateSend)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Studentses.Family)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Studentses.stuCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sortFile)
+        </td>
+        <td>
+            <a href='~/Documents/@item.Urlfile'>
+                <i class="fa fa-2x fa-download"></i>
+            </a>
+        </td>
+        <td>
+            @dataCon.ConverToShamsi(Convert.ToDateTime(item.DateSend))
+        </td>
+        <td>
+            @Html.ActionLink("حذف", "Delete", new { id = item.ID }, new { @class = "btn btn-xs btn-danger" })
+        </td>
+    </tr>
+    }
+
+
+
+</table>
